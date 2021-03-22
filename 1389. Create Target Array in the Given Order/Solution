@@ -1,0 +1,31 @@
+class Solution {
+    public int[] createTargetArray(int[] nums, int[] index) {
+
+
+        TreeMap<Integer, LinkedList<Integer>> myHash = new TreeMap<>();
+
+        for (int i = 0; i < index.length; i++) {
+            if (myHash.containsKey(index[i])) {
+                myHash.get(index[i]).addFirst(nums[i]);
+            } else {
+                LinkedList<Integer> temp = new LinkedList<>();
+                temp.addFirst(nums[i]);
+                myHash.put(index[i], temp);
+            }
+        }
+
+        int[] target = new int[nums.length];
+        int t = 0;
+
+        for(Integer i:myHash.keySet()){
+            for (int j = 0; j < myHash.get(i).size(); j++) {
+                target[t++] = myHash.get(i).get(j);
+
+            }
+        }
+
+
+        return target;
+
+    }
+}
